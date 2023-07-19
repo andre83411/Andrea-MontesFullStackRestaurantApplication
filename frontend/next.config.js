@@ -4,9 +4,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "1337",
+        protocol: "https",
+        hostname: "restaurant-strapi-backend.onrender.com", // Update with your new backend URL
         pathname: "/uploads/**",
       },
     ],
