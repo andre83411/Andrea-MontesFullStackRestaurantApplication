@@ -43,8 +43,11 @@ export default function CheckoutForm() {
   if (!initialRender) return null;
 
   function onChange(e) {
-    const updateItem = (data[e.target.name] = e.target.value);
-    setData({ ...data, updateItem });
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
   async function submitOrder(e) {
