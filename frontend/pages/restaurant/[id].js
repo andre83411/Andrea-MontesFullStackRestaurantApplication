@@ -72,7 +72,7 @@ function DishCard({ data, query }) {
                   top
                   src={`${
                     process.env.STRAPI_URL ||
-                    'http://localhost:1337'
+                    'https://restaurant-strapi-backend.onrender.com'
                   }${
                     data.attributes.image.data.attributes
                       .url
