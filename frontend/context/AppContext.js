@@ -117,7 +117,7 @@ const getUser = async () => {
       },
     },
   });
-  return data.me;
+  return data?.me ?? null;
 };
 
 export const useAppContext = () => {
