@@ -121,6 +121,8 @@ export default function CheckoutForm() {
         },
       });
 
+      console.log("Response data:", response); 
+
       if (response.createOrder.data) {
         alert("Transaction Successful, continue your shopping");
         setData(INITIAL_STATE);
