@@ -1,8 +1,6 @@
 "use strict";
-import Stripe from 'stripe';
-const stripe = new Stripe("sk_test_51NLz3TJFbnWEjz9NzvE8PVFYMsIxpBc90JcLxe6LXhBn81YE0rsrRjfGyxzHtZjbdFVAWR6afgPe6gKN5IKSukBV00oyiDCY1Y", {
-  apiVersion: '2022-11-15',
-})
+const stripe = require("stripe")("sk_test_51NLz3TJFbnWEjz9NzvE8PVFYMsIxpBc90JcLxe6LXhBn81YE0rsrRjfGyxzHtZjbdFVAWR6afgPe6gKN5IKSukBV00oyiDCY1Y");
+
 /**
  *  order controller
  */
