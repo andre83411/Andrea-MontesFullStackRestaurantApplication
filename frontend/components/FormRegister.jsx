@@ -10,6 +10,18 @@ export default function FormRegister({
   showForgotPasswordLink,
   onForgotPasswordClick,
 }) {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.email) {
+      setFormData({...formData, error: {message: 'Please enter an email.'}});
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setFormData({...formData, error: {message: 'Invalid email format.'}});
+    } else {
+      callback();
+    }
+  }
+
   return (
     <section className="py-24 md:py-32 bg-white">
       <div className="container px-4 mx-auto">
@@ -17,7 +29,7 @@ export default function FormRegister({
           <div className="mb-6 text-center">
             <h3 className="mb-4 text-2xl md:text-3xl font-bold">{title}</h3>
           </div>
-          <form onSubmit={callback}>
+          <form onSubmit={onSubmit}>
             <div className="mb-6">
               <label
                 className="block mb-2 text-coolGray-800 font-medium"
@@ -33,7 +45,7 @@ export default function FormRegister({
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setFormData({ ...formData, email: e.target.value, error: null })
                 }
               />
             </div>
@@ -67,16 +79,6 @@ export default function FormRegister({
             >
               {buttonText}
             </button>
-            {showForgotPasswordLink && (
-              <div className="text-center mt-4">
-                <button
-                  className="text-teal-500 underline hover:text-teal-700 focus:outline-none"
-                  onClick={onForgotPasswordClick}
-                >
-                  Forgot password?
-                </button>
-              </div>
-            )}
           </form>
         </div>
       </div>
