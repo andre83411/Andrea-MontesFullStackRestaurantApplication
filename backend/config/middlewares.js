@@ -34,12 +34,4 @@ module.exports = [
       },
     },
   },
-  {
-    name: 'strapi::graphql',
-    config: {
-      playground: {
-        enabled: true,
-      },
-    },
-  },
 ];
