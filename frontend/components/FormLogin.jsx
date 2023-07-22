@@ -69,16 +69,6 @@ export default function FormLogin({
             >
               {buttonText}
             </button>
-            {showForgotPasswordLink && (
-              <div className="text-center mt-4">
-                <button
-                  className="text-teal-500 underline hover:text-teal-700 focus:outline-none"
-                  onClick={onForgotPasswordClick}
-                >
-                  Forgot password?
-                </button>
-              </div>
-            )}
           </form>
         </div>
       </div>
