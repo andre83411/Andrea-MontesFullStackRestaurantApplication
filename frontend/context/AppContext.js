@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext, useEffect, useCallback } from "react";
 import Cookie from "js-cookie";
 import { gql } from "@apollo/client";
 import { client } from "@/pages/_app.js";
@@ -15,8 +15,30 @@ export const AppProvider = ({ children }) => {
     cartCookie ? JSON.parse(cartCookie) : { items: [], total: 0 }
   );
   const [loggedIn, setLoggedIn] = useState(false)
-
   const [loadingUser, setLoadingUser] = useState(true);
+
+  const getUser = useCallback(async () => {
+    const token = Cookie.get("token");
+    if (!token) return null;
+    const { data } = await client.query({
+      query: gql`
+        query {
+          me {
+            id
+            email
+            username
+          }
+        }
+      `,
+      context: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    });
+    return data?.me ?? null;
+  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +47,7 @@ export const AppProvider = ({ children }) => {
       setLoadingUser(false); 
     };
     fetchData();
-  }, []);
+  }, [getUser]);
 
   useEffect(() => {
     Cookie.set("cart", JSON.stringify(cart));
@@ -98,27 +120,7 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-const getUser = async () => {
-  const token = Cookie.get("token");
-  if (!token) return null;
-  const { data } = await client.query({
-    query: gql`
-      query {
-        me {
-          id
-          email
-          username
-        }
-      }
-    `,
-    context: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
-  return data?.me ?? null;
-};
+
 
 export const useAppContext = () => {
   const context = useContext(AppContext);
