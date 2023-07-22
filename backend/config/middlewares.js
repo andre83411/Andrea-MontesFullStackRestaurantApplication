@@ -9,7 +9,6 @@ module.exports = [
   'strapi::favicon',
   'strapi::public',
   {
-
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
