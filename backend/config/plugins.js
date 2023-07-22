@@ -11,7 +11,7 @@ module.exports = ({ env }) => ({
             params: {
               ACL: process.env.AWS_ACL || 'public-read',
               signedUrlExpires: process.env.AWS_SIGNED_URL_EXPIRES || 15 * 60,
-              Bucket: process.env.AWS_BUCKET, // Use process.env to retrieve the S3 bucket name
+              Bucket: 'render-strapi-backend',
             },
           },
         },
