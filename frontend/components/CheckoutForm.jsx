@@ -79,32 +79,42 @@ export default function CheckoutForm() {
 
       const { data: response } = await client.mutate({
         mutation: gql`
-          mutation CreateOrder(
-            $amount: Int
-            $dishes: JSON
-            $address: String
-            $city: String
-            $state: String
-            $token: String
+        mutation CreateOrder(
+          $amount: Int
+          $dishes: JSON
+          $address: String
+          $city: String
+          $state: String
+          $token: String
+          $userId: ID
+        ) {
+          createOrder(
+            data: {
+              amount: $amount
+              dishes: $dishes
+              address: $address
+              city: $city
+              state: $state
+              token: $token
+              user: $userId
+            }
           ) {
-            createOrder(
-              data: {
-                amount: $amount
-                dishes: $dishes
-                address: $address
-                city: $city
-                state: $state
-                token: $token
-              }
-            ) {
-              data {
-                id
-                attributes {
-                  token
+            data {
+              id
+              attributes {
+                token
+                user{
+                  data{
+                    id
+                    attributes{
+                      username
+                    }
+                  }
                 }
               }
             }
           }
+        }
         `,
         variables: {
           amount: cart.total,
@@ -113,6 +123,7 @@ export default function CheckoutForm() {
           city: data.city,
           state: data.state,
           token: token.token.id,
+          userId: user.id,
         },
         context: {
           headers: {
