@@ -7,8 +7,6 @@ export default function FormRegister({
   setFormData,
   callback,
   error,
-  showForgotPasswordLink,
-  onForgotPasswordClick,
 }) {
 
   const onSubmit = (e) => {
@@ -19,6 +17,13 @@ export default function FormRegister({
       setFormData({...formData, error: {message: 'Invalid email format.'}});
     } else {
       callback();
+    }
+  }
+
+  const handleInvalid = (e) => {
+    e.target.setCustomValidity('');
+    if (!e.target.validity.valid) {
+      e.target.setCustomValidity('Please enter email to proceed.');
     }
   }
 
@@ -47,6 +52,9 @@ export default function FormRegister({
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value, error: null })
                 }
+                required
+                onInvalid={handleInvalid}
+                onInput={(e) => e.target.setCustomValidity('')}
               />
             </div>
             <div className="mb-4">
@@ -64,7 +72,7 @@ export default function FormRegister({
                 placeholder="************"
                 value={formData.password}
                 onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
+                  setFormData({ ...formData, password: e.target.value, error: null })
                 }
               />
             </div>
