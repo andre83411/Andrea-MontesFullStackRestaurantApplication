@@ -43,9 +43,7 @@ function RestaurantCard({ data }) {
         <CardImg
           className="w-full rounded-2xl"
           top
-          src={`${process.env.STRAPI_URL ||
-            'https://restaurant-strapi-backend.onrender.com'
-            }${data.attributes.image.data[0].attributes.url}`}
+          src={`${data.attributes.image.data[0].attributes.url}`}
           alt="Restaurant Image" 
           style={{ height: '200px', objectFit: 'cover' }} // Inline styles 
         />

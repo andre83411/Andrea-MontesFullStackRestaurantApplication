@@ -71,9 +71,6 @@ function DishCard({ data, query }) {
                   className="w-full rounded-2xl"
                   top
                   src={`${
-                    process.env.STRAPI_URL ||
-                    'https://restaurant-strapi-backend.onrender.com'
-                  }${
                     data.attributes.image.data.attributes
                       .url
                   }`}
