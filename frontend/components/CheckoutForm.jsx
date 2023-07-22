@@ -134,7 +134,7 @@ export default function CheckoutForm() {
 
       console.log("Response data:", response); 
 
-      if (response.data.createOrder) {
+      if (response.createOrder.data.attributes.token) {
         alert("Transaction Successful, continue your shopping");
         setData(INITIAL_STATE);
         resetCart();
