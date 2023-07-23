@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "./Layout";
 
 export default function FormRegister({
   title,
@@ -34,6 +35,7 @@ export default function FormRegister({
           <div className="mb-6 text-center">
             <h3 className="mb-4 text-2xl md:text-3xl font-bold">{title}</h3>
           </div>
+          <Layout>
           <form onSubmit={onSubmit}>
             <div className="mb-6">
               <label
@@ -88,6 +90,7 @@ export default function FormRegister({
               {buttonText}
             </button>
           </form>
+          </Layout>
         </div>
       </div>
     </section>

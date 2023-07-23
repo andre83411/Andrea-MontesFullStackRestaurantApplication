@@ -45,7 +45,6 @@ export default function RegisterRoute() {
   if (loading) return <Loader />;
 
   return (
-    <Layout>
     <FormRegister
       title="Sign Up"
       buttonText="Sign Up"
@@ -54,6 +53,5 @@ export default function RegisterRoute() {
       callback={handleRegister}
       error={error}
     />
-    </Layout>
   );
 }
