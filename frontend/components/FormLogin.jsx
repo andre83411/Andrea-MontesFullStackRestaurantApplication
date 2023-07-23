@@ -7,9 +7,26 @@ export default function FormLogin({
   setFormData,
   callback,
   error,
-  showForgotPasswordLink,
-  onForgotPasswordClick,
 }) {
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.email) {
+      setFormData({...formData, error: {message: 'Please enter an email.'}});
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setFormData({...formData, error: {message: 'Invalid email format.'}});
+    } else {
+      callback();
+    }
+  }
+
+  const handleInvalid = (e) => {
+    e.target.setCustomValidity('');
+    if (!e.target.validity.valid) {
+      e.target.setCustomValidity('Please enter email to proceed.');
+    }
+  }
+
   return (
     <section className="py-24 md:py-32 bg-white">
       <div className="container px-4 mx-auto">
@@ -17,7 +34,7 @@ export default function FormLogin({
           <div className="mb-6 text-center">
             <h3 className="mb-4 text-2xl md:text-3xl font-bold">{title}</h3>
           </div>
-          <form onSubmit={callback}>
+          <form onSubmit={onSubmit}>
             <div className="mb-6">
               <label
                 className="block mb-2 text-coolGray-800 font-medium"
@@ -33,9 +50,12 @@ export default function FormLogin({
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setFormData({ ...formData, email: e.target.value, error: null })
                 }
                 autoComplete="email" 
+                required
+                onInvalid={handleInvalid}
+                onInput={(e) => e.target.setCustomValidity('')}
               />
             </div>
             <div className="mb-4">
@@ -53,7 +73,7 @@ export default function FormLogin({
                 placeholder="************"
                 value={formData.password}
                 onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
+                  setFormData({ ...formData, password: e.target.value, error: null })
                 }
                 
               />
