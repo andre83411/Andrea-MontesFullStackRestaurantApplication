@@ -6,6 +6,7 @@ import Cookie from "js-cookie";
 
 import Loader from "@/components/Loader";
 import FormRegister from "@/components/FormRegister";
+import Layout from "@/components/Layout";
 
 const REGISTER_MUTATION = gql`
   mutation Register($username: String!, $email: String!, $password: String!) {
@@ -44,6 +45,7 @@ export default function RegisterRoute() {
   if (loading) return <Loader />;
 
   return (
+    <Layout>
     <FormRegister
       title="Sign Up"
       buttonText="Sign Up"
@@ -52,5 +54,6 @@ export default function RegisterRoute() {
       callback={handleRegister}
       error={error}
     />
+    </Layout>
   );
 }
